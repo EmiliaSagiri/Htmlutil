@@ -16,13 +16,18 @@
         }
     </style>
 </head>
-
+<script>
+    function ljj(){
+        document.getElementById("readme").readOnly = false ;
+    }
+</script>
 <body>
     <h1 ><a>关于</a></h1>
     <br />
-    <textarea rows="10" cols="9" wrap="soft" readonly>123456789012345678901234567890</textarea>
+    <textarea rows="10" cols="9" wrap="soft" id="readme" readonly >123456789012345678901234567890</textarea>
     <a href="file:///D:/uidq3372/html/baidu.html">返回</a>
     <a href="file:///D:/uidq3372/html/Login.html">登录</a>
+    <button type="button" onclick="ljj()">点击</button>
 </body>
 
 </html>
