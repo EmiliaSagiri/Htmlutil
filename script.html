@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>菜鸡</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js">
+    </script>
+</head>
+
+<body>
+    <h1 style="text-align: center;"><a>脚本类工具</a></h1>
+    <form action="http://119.91.107.252:8001/run">
+        Git log导出：
+        <input type="text" name="message">
+        <input type="submit" value="提交">
+    </form>
+    <p>
+        <button type="button" id="sb">下载文件</button>
+    </p>
+    <script>
+        $(document).ready(function () {
+            var $elesb = $("#sb");
+            //已知一个下载文件的后端接口：https://codeload.github.com/douban/douban-client/legacy.zip/master
+            //方法一：window.open()
+            $elesb.click(function () {
+                
+                window.open("http://119.91.107.252/files/");
+            })
+        })
+    </script>
+</body>
+
+</html>
