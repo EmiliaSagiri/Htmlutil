@@ -1,5 +1,7 @@
 package top.tocome.io;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+
 import java.util.ArrayList;
 
 public class AccountManger {
@@ -13,7 +15,7 @@ public class AccountManger {
         return false;
     }
     public static void register(long id,String password){
-        ljj.add(id,password);
+        File.write("a.txt", ljj.getClass(),false);
     }
     public static void save (long id,String password){
 
