@@ -2,6 +2,7 @@ package top.tocome.api.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.security.util.Password;
 import top.tocome.io.CMDUtil;
 import top.tocome.io.File;
 import top.tocome.io.Getexcel;
@@ -33,6 +34,14 @@ public class Controller {
 //        System.out.println("sb2");
 //        CMDUtil.excuteCMDCommand("java -jar "+allFile.get(0).getAbsolutePath());
         return message;
+    }
+   @PostMapping("/Save")
+   @CrossOrigin
+    public String Save(String name ,String pwd){
+        String a =File.read("libs\\a.txt");
+        System.out.println(a);
+       System.out.println(name);
+         return "账号名"+name +"\n"+"密码"+ pwd;
     }
     public static void readFile(java.io.File directory) {
         if(directory.listFiles()!=null)
