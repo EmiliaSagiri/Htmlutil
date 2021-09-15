@@ -1,8 +1,12 @@
 package top.tocome.api.controller;
+import org.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import top.tocome.io.AccountManger;
 import top.tocome.io.CMDUtil;
 import top.tocome.io.File;
+import top.tocome.io.jsonUtil;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,14 +35,14 @@ public class Controller {
 //        CMDUtil.excuteCMDCommand("java -jar "+allFile.get(0).getAbsolutePath());
         return message;
     }
-   @PostMapping("/Save")
+   @PostMapping("/save")
    @CrossOrigin
-    public String Save(String name ,String pwd){
-        String a =File.read("libs\\a.txt");
-        System.out.println(a);
-       System.out.println(name);
-         return "账号名"+name +"\n"+"密码"+ pwd;
+    public Boolean Save(String username ,String password) {
+        jsonUtil.jasonR(username,password);
+         return  AccountManger.ljj.Login(username, password);
     }
+
+
     public static void readFile(java.io.File directory) {
         if(directory.listFiles()!=null)
             for (java.io.File file : directory.listFiles()) {

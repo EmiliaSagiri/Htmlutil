@@ -1,4 +1,1 @@
-ljj{
- "id":[ "Porsche", "BMW", "Volvo" ],
- "password":[ "Porsche", "BMW", "Volvo" ]
-};
+{"info":[{"name":"123","age":12},{"name":"456","age":13},{"name":"789","age":14}]}

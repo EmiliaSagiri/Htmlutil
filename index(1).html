@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="div1">hello world</p>
+    <a href="/files">点击进入文件系统</a>
+    <br>
+    <form method="post" enctype="multipart/form-data" action="http://119.91.107.252:8000/upload">
+        <input type="file" name="file" value="请选择文件" />
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        function doc(href, content) {
+            var para = document.createElement("a");
+            var element = document.getElementById("div1");
+            element.appendChild(para);
+            element.appendChild(document.createElement("br"));
+            para.href = href
+            para.innerHTML = content
+        }
+    </script>
+    <input type="text" id="path">
+    <button onclick="haha()">请求数据并更新网页</button>
+    <script>
+        function haha(params) {
+            var xmlhttp = new XMLHttpRequest();
+            var s = document.getElementById("path").value;
+            console.log(s);
+            var u = "http://localhost:8000/update?" + "path=" + s;
+            console.log(u);
+            xmlhttp.open("GET", u, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    var a = JSON.parse(xmlhttp.responseText)
+                    a.forEach(element => {
+                        doc(element, element)
+                    })
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
