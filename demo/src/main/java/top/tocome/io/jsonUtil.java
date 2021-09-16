@@ -30,7 +30,7 @@ public class jsonUtil {
                 jArray.put(innerjObject);
             }
             jObject.put("info", jArray);
-            PrintStream pStream = new PrintStream(new FileOutputStream("a.txt"));
+            PrintStream pStream = new PrintStream(new FileOutputStream("a.json"));
             pStream.print(jObject);
             pStream.close();
 
@@ -46,7 +46,7 @@ public class jsonUtil {
     public static Boolean jasonR(String namea ,String passworda) {
         System.out.println();
         //先获取文件，该文件为上文写入位置
-        java.io.File file = new File("a.txt");
+        java.io.File file = new File("a.json");
         Scanner scanner = null;
         try {
             scanner = new Scanner(new FileInputStream(file));

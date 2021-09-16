@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="charset = utf-8">
+    <title>about</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        textarea {
+            text-align: center;
+            font-size: xx-large;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <textarea rows="10" cols="9" wrap="soft" id="te" ></textarea>
+    <button type="button" id=cook onclick="savecookie()">保存cookies</button>
+    <script type="text/javascript">
+        function setCookie(name, value, expires, path, domain, secure) {
+                var curCookie = name + "=" + escape(value) +
+                        ((expires) ? "; expires=" + expires.toGMTString() : "") +
+                        ((path) ? "; path=" + path : "") +
+                        ((domain) ? "; domain=" + domain : "") +
+                        ((secure) ? "; secure" : "");
+                if ( (name + "=" + escape(value)).length <= 4000){
+                        document.cookie = curCookie;
+                        }
+                else
+                        if (confirm("Cookie exceeds 4KB and will be cut!"))
+                                document.cookie = curCookie;
+        }
+        function getCookie(name) {
+                var prefix = name + "=";
+                var cookieStartIndex = document.cookie.indexOf(prefix);
+                if (cookieStartIndex == -1)
+                        return null;
+                var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex + prefix.length);
+                if (cookieEndIndex == -1)
+                        cookieEndIndex = document.cookie.length;
+                return unescape(document.cookie.substring(cookieStartIndex + prefix.length, cookieEndIndex));
+        }
+        function savecookie(){
+                 var cont=document.getElementById("te").value;
+                 if(cont){
+                 var data=new Date();
+                 data.setTime(data.getTime() + 1*24*3600*1000*1000); //对应天,小时,秒,自己换算设置
+                 setCookie("cont",cont,data);
+                 }
+        }
+        window.onload=function(){
+            var cont=getCookie("cont");
+            if(cont!=null) document.getElementById("te").value=cont;
+        }
+        </script>
+</body>
+</html>

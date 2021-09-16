@@ -1,43 +1,32 @@
 package top.tocome.api;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.json.JSONException;
 import top.tocome.io.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 public class JavaTest {
-    public static final ArrayList<String> sum =new ArrayList<>();
-    public static final ArrayList<String> sum2 =new ArrayList<>();
-    public static void main(String[] args) {
-            Boolean x = jsonUtil.jasonR("王五","14");
-            String y = File.read("a.txt");
-            System.out.println(x);
-            System.out.println(y);
 
-        System.out.println(getName(y));
-        System.out.println(getAge(y));
+    public static void main(String[] args) throws JSONException {
+       Boolean x =AccountManger.ljj.Login("11","11");
+        System.out.println(x);
+
+
+
 
     }
-    public static ArrayList<String> getAge(String x){
-        String pattern = " (\\d+)+(\\d+)+(\\d+) " ;
-        String y = null ;
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(x);
-        while (m.find()) {
-            sum2.add(m.group());
+    public static void find(String key){
+        String a = File.read("a.json");
+//        AccountManger.ljj.register("1","2");
+
+        JSONArray x = JSON.parseArray(a);
+        for (int i=0 ;i< x.size();i++){
+            System.out.println( x.getJSONObject(i).getString(key)+x.getJSONObject(i).getString("password"));
         }
-        return sum2;
     }
-    public static ArrayList<String> getName(String x){
-        String pattern = "(\\d+)+(\\d+)?" ;
-        String y = null ;
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(x);
-        while (m.find()) {
-            sum.add(m.group());
-        }
-        return sum;
-    }
+
+
 }

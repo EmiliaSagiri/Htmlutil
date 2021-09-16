@@ -38,8 +38,18 @@ public class Controller {
    @PostMapping("/save")
    @CrossOrigin
     public Boolean Save(String username ,String password) {
-        jsonUtil.jasonR(username,password);
          return  AccountManger.ljj.Login(username, password);
+    }
+    @PostMapping("/register")
+    @CrossOrigin
+    public Boolean Register(String username ,String password) {
+        try {
+            AccountManger.ljj.register2(username,password);
+            AccountManger.ljj.register(username,password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  true;
     }
 
 

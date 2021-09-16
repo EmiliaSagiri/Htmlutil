@@ -21,50 +21,12 @@
 <body>
     <h1><a>关于</a></h1>
     <br />
-    <textarea rows="10" cols="9" wrap="soft" id="readme" readonly>123456789012345678901234567890</textarea>
-
-    <!-- <div id="container">
-        <div id="topnav" class="topnav">
-            <a href="login" class="signin"><span>登录</span></a>
-        </div>
-        <fieldset id="signin_menu" style="display:none">
-            <form method="post" id="signin" action="http://localhost:8001/Save">
-                <label for="username">用户名</label>
-                <input id="username" name="username" value="" title="username" tabindex="4" type="text">
-                </p>
-                <p>
-                    <label for="password">密码</label>
-                    <input id="password" name="password" value="" title="password" tabindex="5" type="password">
-                </p>
-                <p class="remember">
-                    <input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-                    <input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
-                    <label for="remember">记住密码</label>
-                </p>
-            </form>
-            <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
-        </fieldset>
-    </div> -->
-
-    <!-- <form id="login" name="login" action="http://localhost:8001/Save" method="post" target="test">
-
-        <ul>
-
-            <li><label>用户名</label><input id="name" name="name" class="easyui-textbox" type="name" /></li>
-
-            <li><label>密 码</label><input id="pwd" name="pwd" class="easyui-textbox" type="password" /></li>
-
-            <li class="submits"><input type="checkbox" id="checkpwd" />
-                <fontsize="-2" color="#999999">记住用户和密码</fontsize> <input id="btn" class="submit" type="submit"
-                        OnClick="userLogin()" value="登录" />
-            </li>
-
-        </ul>
-
-    </form> -->
+    <textarea rows="10" cols="9" wrap="soft" id="readme" readonly></textarea>
     <li><label>用户名</label><input id="names" name="username" class="easyui-textbox" type="name" /></li>
     <li><label>密 码</label><input id="pwds" name="password" class="easyui-textbox" type="password" /></li>
     <button type="button" onclick="haha()">登录</button>
+    <button type="button" onclick="lala()">注册</button>
+    <button type="button" onclick="saveCookie()">dian</button>
     <script>
         function haha(params) {
             var xmlhttp = new XMLHttpRequest();
@@ -73,7 +35,6 @@
             var b = document.getElementById("pwds").value;
             var u = "http://localhost:8001/save";
             console.log(a, b);
-            console.log( test);
             var data = new FormData();
             data.append("username", a)
             data.append("password", b)
@@ -83,20 +44,75 @@
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
                     if(xmlhttp.responseText=="true"){
                         document.getElementById("readme").readOnly=false;
-                        // test = xmlhttp.responseText;
+                        alert("密码正确");
                         console.log( document.getElementById("readme").readOnly);
-                        alert(xmlhttp.responseText);
-
                     }
-                   
-                    
+                    else{
+                        alert("密码错误");
+                        document.getElementById("names").value="";
+                        document.getElementById("pwds").value="";
+                    }
                 }
-            
-                   
-                
+            }
+        }
+        function lala(params){
+            var xmlhttp = new XMLHttpRequest();
+            var a = document.getElementById("names").value;
+            var b = document.getElementById("pwds").value;
+            var u = "http://localhost:8001/register";
+            console.log(a, b);
+            var data = new FormData();
+            data.append("username", a)
+            data.append("password", b)
+            xmlhttp.open("POST", u, true);
+            xmlhttp.send(data);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+                    if(xmlhttp.responseText=="true"){
+                        alert(xmlhttp.responseText);
+                        alert("注册成功");
+                    }
+                }
             }
         }
     </script>
+    <script type="text/javascript">
+        function setCookie(name, value, expires, path, domain, secure) {
+                var curCookie = name + "=" + escape(value) +
+                        ((expires) ? "; expires=" + expires.toGMTString() : "") +
+                        ((path) ? "; path=" + path : "") +
+                        ((domain) ? "; domain=" + domain : "") +
+                        ((secure) ? "; secure" : "")
+                if ( (name + "=" + escape(value)).length <= 4000){
+                        document.cookie = curCookie
+                        }
+                else
+                        if (confirm("Cookie exceeds 4KB and will be cut!"))
+                                document.cookie = curCookie
+        }
+        function getCookie(name) {
+                var prefix = name + "="
+                var cookieStartIndex = document.cookie.indexOf(prefix)
+                if (cookieStartIndex == -1)
+                        return null
+                var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex + prefix.length)
+                if (cookieEndIndex == -1)
+                        cookieEndIndex = document.cookie.length
+                return unescape(document.cookie.substring(cookieStartIndex + prefix.length, cookieEndIndex))
+        }
+        function savecookie(){
+                 var cont=document.getElementById("te").value;
+                 if(cont){
+                 var data=new Date();
+                 data.setTime(data.getTime() + 1*24*3600*1000*1000); //对应天,小时,秒,自己换算设置
+                 setCookie("cont",cont,data);
+                 }
+        }
+        window.onload=function(){
+            var cont=getCookie("cont");
+            if(cont) document.getElementById("te").value=cont;
+        }
+        </script>
     <!-- <iframe id="id_iframe" name="test" style="display:none;"></iframe> -->
     <!-- <script>
         $(document).ready(function () {
